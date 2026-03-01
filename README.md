@@ -89,7 +89,7 @@ People putting out real GTM engineering content.
 - **Devin Reed** — Ex-Gong. Content-as-GTM-engine.
 
 **Claude Code x GTM**
-- **Axel Hägg** — Built the GTM Cortex (this repo's origin story). CLI-native GTM, braintrust architecture.
+- **Axel Hägg** — Built the GTM Cortex (this repo's origin story). CLI-native GTM, braintrust architecture. Writes at [Advanced Pectoral Thinking](https://advancedpectoralthinking.substack.com). More at [haegghaegg.se](https://haegghaegg.se).
 
 ## Contributing
 

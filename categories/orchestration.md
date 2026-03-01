@@ -172,18 +172,45 @@ Pick Cargo when you need a purpose-built GTM workflow platform — more structur
 
 ---
 
-**Also in this space**: Deepline (deepline.ai) — enterprise RevOps OS that unifies data warehouses, CRM, and workflow automation. Warehouse-native architecture, AI-powered pipeline management. No public API, no MCP server — contact sales for access. Relevant for enterprise teams with data engineering resources who want their RevOps layer sitting on top of their data warehouse rather than in a SaaS silo.
+### Deepline
+
+**Status**: Researched
+**URL**: https://deepline.com
+**Pricing**: Waitlist (launching 2026)
+**API/CLI**: ★★★★★
+
+The fastest way to deploy and measure custom GTM AI workflows. Think Clay — but designed from day one to be controlled by Claude Code. Deepline captures every signal and makes your AI strategy multiplayer across your team. API-first architecture means your agent can build, run, and monitor GTM workflows programmatically rather than clicking through a spreadsheet UI.
+
+**Best for**: Teams already running Claude Code who want a purpose-built GTM workflow backend. Signal capture and measurement across the entire pipeline. Multiplayer GTM — where multiple team members and agents operate on shared workflows with visibility into what's happening. Anyone who's outgrown Clay's table metaphor and wants the orchestration layer to be as programmable as the rest of their stack.
+
+**Watch out**: Still in pre-release (waitlist as of early 2026). No public pricing yet. The "Clay but API-native" positioning is compelling but unproven at scale — Clay has years of battle-testing and 100+ data provider integrations. Early-adopter risk applies. Evaluate once access opens.
+
+#### Selection criteria
+
+Pick Deepline when it launches if you want a GTM workflow platform that treats the API (and Claude Code) as the primary interface, not a bolted-on afterthought. The differentiator over Clay is programmability — Clay's power is in the spreadsheet UI and waterfall enrichment; Deepline's bet is that the future is agent-driven, not spreadsheet-driven. If you need production-ready workflows today, Clay and Cargo are shipping. If you want to be early on the agent-native orchestration wave, get on the Deepline waitlist.
+
+#### Getting started
+
+1. Join the waitlist at deepline.com
+2. API-first — expect Claude Code integration as a primary workflow
+
+#### Connects to
+
+- **CRM (Attio, Salesforce)** (`crm.md`): Pipeline data flows in and out of Deepline workflows.
+- **Outreach (Instantly, Smartlead, HeyReach)** (`outreach.md`): Qualified leads route into outbound sequences.
+- **Enrichment (Clay)** (`enrichment.md`): Complementary — Clay for waterfall enrichment, Deepline for workflow orchestration.
+- **Discovery (Exa)** (`discovery.md`): Research feeds into Deepline for automated qualification and routing.
 
 ---
 
 ## Quick comparison
 
-| Dimension | Clay | n8n | Composio/RUBE | Cargo |
-|-----------|------|-----|---------------|-------|
-| Mental model | Spreadsheet that does things | Visual workflow builder | Universal app connector | GTM workflow platform |
-| Strength | Enrichment + waterfall logic | Scheduled multi-step automations | AI agent ↔ business tools | Enrichment + routing + CRM sync |
-| MCP support | Anthropic-hosted connector | Native MCP server + community | Native MCP (7 meta-tools) | Client + server MCP |
-| Self-hostable | No | Yes (free Community Edition) | No (SaaS) | No (SaaS) |
-| Billing model | Credits per enrichment action | Per execution (not per step) | Requests per day | Monthly subscription |
-| Complexity ceiling | Medium (table metaphor limits branching) | High (arbitrary workflow logic) | Medium (agent-driven, not scheduled) | Medium-High (GTM-specific) |
-| Best pair | Outreach tools (outbound) | CRM + webhooks (routing) | AI coding agents (Claude Code, Cursor) | CRM + outreach (pipeline) |
+| Dimension | Clay | n8n | Composio/RUBE | Cargo | Deepline |
+|-----------|------|-----|---------------|-------|---------|
+| Mental model | Spreadsheet that does things | Visual workflow builder | Universal app connector | GTM workflow platform | Agent-native GTM backend |
+| Strength | Enrichment + waterfall logic | Scheduled multi-step automations | AI agent ↔ business tools | Enrichment + routing + CRM sync | API-first workflows + signal capture |
+| MCP support | Anthropic-hosted connector | Native MCP server + community | Native MCP (7 meta-tools) | Client + server MCP | TBD (launching 2026) |
+| Self-hostable | No | Yes (free Community Edition) | No (SaaS) | No (SaaS) | No (SaaS) |
+| Billing model | Credits per enrichment action | Per execution (not per step) | Requests per day | Monthly subscription | TBD |
+| Complexity ceiling | Medium (table metaphor limits branching) | High (arbitrary workflow logic) | Medium (agent-driven, not scheduled) | Medium-High (GTM-specific) | High (API-driven) |
+| Best pair | Outreach tools (outbound) | CRM + webhooks (routing) | AI coding agents (Claude Code, Cursor) | CRM + outreach (pipeline) | Claude Code (primary interface) |
