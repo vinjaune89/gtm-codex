@@ -1,11 +1,11 @@
 # Enrichment
 
-Tools that add structured data to contacts and companies — emails, phone numbers, firmographics, technographics. Enrichment sits between research (finding who to target) and sequencing (reaching out). The core question: given a name or company, fill in the contact data and context you need to act.
+Structured contact data — emails, phones, firmographics — from databases. Not web research (see Discovery). These tools answer "how do I reach this person?" once you already know who you want to reach.
 
 ---
 
 ### Clay
-
+**Status**: ★ In our stack — enrichment + contact discovery
 **URL**: https://clay.com
 **Pricing**: Paid (starts ~$149/month, credits-based)
 **API/CLI**: ★★★★★
@@ -22,7 +22,9 @@ Pick Clay when you need high-accuracy enrichment across multiple data sources an
 
 #### Getting started
 
-Clay has a native MCP server for Claude:
+Clay has two MCP paths:
+
+**1. Native MCP server** (for enrichment via AI agents):
 
 ```json
 {
@@ -37,7 +39,9 @@ Clay has a native MCP server for Claude:
 
 Authentication is OAuth-based through the Clay app.
 
-Key MCP tools:
+**2. Anthropic-hosted connector** (`claude_ai_Clay`): Available in Claude's MCP ecosystem. Tools include `find-and-enrich-contacts-at-company`, `find-and-enrich-list-of-contacts`, `get-task` (async polling). Email enrichment is async — poll with `get-task` until state is `completed`. Add `dataPoints: { contactDataPoints: [{ type: "Email" }] }` for email-only enrichment.
+
+Key MCP tools (both paths):
 - `find-and-enrich-contacts-at-company` — role-based discovery (e.g., "find the Head of Marketing at Acme Corp")
 - `find-and-enrich-list-of-contacts` — enrich a list of named people with email and other data
 - `get-task` — poll for async enrichment results (email verification takes time)
@@ -46,15 +50,15 @@ Pattern: request enrichment, receive a task ID, poll `get-task` until state is `
 
 #### Connects to
 
-- **CRM (Attio, HubSpot, Salesforce)** — enriched contacts push to CRM records. Clay has native CRM integrations and API export.
-- **Sequencing (Instantly, Apollo, Smartlead)** — enriched + verified emails feed directly into outbound sequences.
-- **Exa AI** — use Exa for initial research/discovery, then Clay for structured enrichment on identified targets.
-- **Orchestration (n8n, Make)** — trigger Clay enrichment from workflow automations.
+- **CRM (Attio, Salesforce)** (crm.md): Enriched contacts push to CRM records. Clay has native CRM integrations and API export.
+- **Outreach (Instantly, Smartlead, lemlist)** (outreach.md): Enriched + verified emails feed directly into outbound sequences.
+- **Discovery (Exa)** (discovery.md): Use Exa for initial research/discovery, then Clay for structured enrichment on identified targets.
+- **Orchestration (n8n, RUBE)** (orchestration.md): Trigger Clay enrichment from workflow automations.
 
 ---
 
 ### Apollo
-
+**Status**: Researched
 **URL**: https://apollo.io
 **Pricing**: Freemium (free tier: 10,000 email credits/month; Basic: $49/user/month; Professional: $79/user/month; Organization: $119/user/month — annual billing)
 **API/CLI**: ★★★★☆
@@ -71,7 +75,7 @@ Pick Apollo when budget matters and you need volume over precision. The free tie
 
 #### Getting started
 
-Apollo launched a native MCP server (beta, Feb 2026) hosted on Apollo infrastructure:
+Apollo launched a native MCP server (beta, Feb 2026). Status and reliability are unverified — treat as experimental.
 
 ```json
 {
@@ -92,55 +96,74 @@ REST API: `https://api.apollo.io/api/v1/people/match` for single-person enrichme
 
 #### Connects to
 
-- **CRM (HubSpot, Salesforce, Attio)** — native HubSpot/Salesforce sync; Attio via API or orchestration layer.
-- **Sequencing (built-in)** — Apollo has its own sequencing engine. Enriched contacts can be added to sequences directly via MCP.
-- **Clay** — some teams use Apollo for initial discovery (free tier), then Clay for waterfall re-enrichment on high-priority targets.
-- **Orchestration (n8n, Make, Zapier)** — Apollo's webhooks and API enable trigger-based enrichment in automated workflows.
+- **CRM (Attio, Salesforce)** (crm.md): Native Salesforce sync; Attio via API or orchestration layer.
+- **Outreach (built-in + Instantly, Smartlead)** (outreach.md): Apollo has its own sequencing engine. Enriched contacts can be added to sequences directly via MCP, or exported to external sequencers.
+- **Enrichment (Clay)** (enrichment.md): Some teams use Apollo for initial discovery (free tier), then Clay for waterfall re-enrichment on high-priority targets.
+- **Orchestration (n8n, Make, Zapier)** (orchestration.md): Apollo's webhooks and API enable trigger-based enrichment in automated workflows.
 
 ---
 
-### Exa AI
+### FullEnrich
+**Status**: Researched
+**URL**: https://fullenrich.com
+**Pricing**: Paid — Starter $29/month (500 credits), Growth $79/month (2,500 credits), Scale $199/month (10,000 credits)
+**API/CLI**: ★★★☆☆
 
-**URL**: https://exa.ai
-**Pricing**: Freemium (API: $10 free credit on signup, then $5/1,000 searches; Websets: free tier 1,000 credits, Core $49/month, Pro $449/month)
-**API/CLI**: ★★★★★
+Waterfall enrichment tool focused on email and phone discovery. Aggregates 15+ data providers into a single lookup — runs through each provider until it finds a verified result. Simpler and cheaper than Clay for pure contact enrichment (no table UI, no workflow orchestration — just find the email).
 
-Semantic web search engine built for AI agents. Not a traditional contact database — instead, it searches the entire web using neural/keyword hybrid search and returns structured results. Doubles as enrichment when you need company context, news, public contact info, or technographic signals that structured databases miss.
+**Best for**: Email discovery when Clay feels like overkill. Teams that need waterfall enrichment (multi-provider email lookup) without building Clay tables. Supplementing Apollo when its single-source database misses contacts. Batch email finding for prospect lists.
 
-**Best for**: Company research and context gathering, finding contact info via public web presence (bios, team pages, press), news monitoring and signal detection, discovering companies matching specific criteria (e.g., "B2B SaaS companies using Stripe with 50-200 employees"), filling gaps that structured enrichment tools miss.
-
-**Watch out**: Not a structured contact database — will not reliably return verified email/phone the way Clay or Apollo will. Results depend on what is publicly available on the web. Best used as a complement to structured enrichment, not a replacement. Pay-per-search pricing can surprise you on high-volume use.
+**Watch out**: Credit-based pricing with no rollover — unused credits expire monthly. No MCP server, no workflow features — it's a lookup tool, not an orchestration platform. No free tier (unlike Apollo). For contact enrichment beyond email/phone (firmographics, technographics), you still need Clay or Apollo.
 
 #### Selection criteria
 
-Pick Exa when you need context, not just contact data. Structured tools (Clay, Apollo) give you email and phone; Exa gives you the "why should we reach out" — recent news, company tech stack mentions, hiring signals, product launches. Also pick Exa when targets are too niche or too new for traditional databases (startups, emerging brands, non-US companies). Use Exa for discovery and research, then hand off to Clay/Apollo for contact-level enrichment.
+Pick FullEnrich when you need email enrichment specifically and want waterfall accuracy without Clay's complexity or cost. It sits between Apollo (single-source, cheaper) and Clay (full orchestration, more expensive). If you need more than just email/phone — company data, tech stack, funding — Clay is the better choice. If budget is the constraint and single-source accuracy is acceptable, Apollo's free tier is hard to beat.
 
 #### Getting started
 
-Exa has a remote MCP server:
-
-```json
-{
-  "mcpServers": {
-    "exa": {
-      "type": "url",
-      "url": "https://mcp.exa.ai/mcp?exaApiKey=YOUR_API_KEY"
-    }
-  }
-}
-```
-
-Get your API key at https://dashboard.exa.ai.
-
-Key MCP tools:
-- `web_search_exa` — semantic or keyword search across the web. Use `type: "neural"` for concept-based queries, `type: "keyword"` for exact matches.
-- `get_code_context_exa` — search code repositories and documentation.
-
-REST API: `POST https://api.exa.ai/search` with `query`, `type`, `numResults`, `contents` (for full-text extraction). Add `includeDomains` / `excludeDomains` to scope results.
+1. Sign up at fullenrich.com
+2. API key from dashboard
+3. REST API for single and batch enrichment lookups
+4. No MCP server available. Integrate via HTTP requests or orchestration tools.
+5. CSV upload available for batch processing
 
 #### Connects to
 
-- **Clay** — Exa discovers targets and context, Clay enriches them with structured contact data. The most common pairing.
-- **CRM (Attio, HubSpot)** — research output feeds into CRM notes and account context fields.
-- **Orchestration (n8n, Make)** — trigger Exa searches from workflow events (e.g., new deal created -> research the company).
-- **AI Agents (Claude, custom agents)** — Exa's MCP server makes it a natural research layer for any agent workflow.
+- **CRM (Attio, Salesforce)** (crm.md): Enriched emails push to CRM contact records via API or CSV import.
+- **Outreach (Instantly, Smartlead)** (outreach.md): Verified emails feed directly into outbound sequences.
+- **Discovery (Exa)** (discovery.md): Exa discovers targets, FullEnrich finds their emails.
+- **Orchestration (n8n)** (orchestration.md): HTTP Request node calls FullEnrich API in automated workflows.
+
+---
+
+### Findymail
+**Status**: Researched
+**URL**: https://findymail.com
+**Pricing**: Paid — Starter $49/month (1,000 credits), Standard $99/month (5,000 credits), Scale $249/month (25,000 credits)
+**API/CLI**: ★★★☆☆
+
+Email finder and verification tool with a focus on deliverability. Claims <1% bounce rate on verified emails — significantly lower than most enrichment tools. Combines multiple data sources for finding emails and runs real-time SMTP verification before returning results. Also offers a LinkedIn email finder Chrome extension.
+
+**Best for**: High-deliverability email campaigns where bounce rate matters. Teams that have been burned by bad email data from cheaper providers. Verifying existing email lists before loading into a sequencer. Finding emails from LinkedIn profiles (via Chrome extension).
+
+**Watch out**: No free tier — $49/month minimum. Credits are per-email, not per-search (failed lookups don't consume credits, which is good). Limited to email — no phone numbers, no firmographics. No MCP server. API is REST-only. The Chrome extension requires manual use (not agent-automatable).
+
+#### Selection criteria
+
+Pick Findymail when email deliverability is critical — specifically when you're running cold email at volume and can't afford bounces destroying your sender reputation. The <1% bounce claim is their differentiator. If you need waterfall enrichment (email + phone + company data), Clay or FullEnrich are more complete. If you just need email verification (not finding), dedicated verification tools exist. Findymail sits in the "find AND verify in one step" niche.
+
+#### Getting started
+
+1. Sign up at findymail.com
+2. API key from dashboard settings
+3. REST API: `POST https://app.findymail.com/api/search/mail` with `{ "name": "...", "domain": "..." }`
+4. Verification endpoint: `POST https://app.findymail.com/api/verify/single`
+5. No MCP server. Chrome extension available for LinkedIn-based lookups.
+6. Integrations: native export to Clay, Apollo, Salesforce
+
+#### Connects to
+
+- **CRM (Attio, Salesforce)** (crm.md): Verified emails update CRM contact records.
+- **Outreach (Instantly, Smartlead, lemlist)** (outreach.md): High-confidence emails feed cold email campaigns with minimal bounce risk.
+- **Enrichment (Clay)** (enrichment.md): Findymail can be a provider within Clay's waterfall enrichment chain.
+- **Discovery (Exa)** (discovery.md): Exa finds prospects, Findymail finds and verifies their emails.

@@ -7,10 +7,11 @@ Clay as the orchestration hub — enrichment, workflows, and lightweight CRM in 
 | Layer | Tool | Why |
 |-------|------|-----|
 | **Orchestration + Enrichment** | Clay | Tables as workflows. Waterfall enrichment, automated actions, data processing. |
-| **CRM** | HubSpot or Clay | HubSpot for full CRM features, or Clay tables as lightweight CRM. |
-| **Sequencing** | Instantly or lemlist | Outbound email sequences. Clay feeds enriched contacts directly. |
+| **CRM** | Attio or Clay | Attio for full CRM features, or Clay tables as lightweight CRM. |
+| **Outreach** | Instantly or lemlist | Outbound email sequences. Clay feeds enriched contacts directly. |
+| **LinkedIn** | HeyReach | LinkedIn outreach with sender rotation. MCP-native. |
 | **Research** | Clay enrichments + Exa | Clay's built-in data providers + Exa for custom research. |
-| **Intent** | RB2B or Common Room | Feed signals into Clay tables for automated processing. |
+| **Signals** | Common Room or Trigify | Feed signals into Clay tables for automated processing. |
 | **Content** | Substack or LinkedIn native | Thought leadership channel. |
 
 ## How Clay Orchestrates
@@ -30,19 +31,20 @@ This replaces what the CLI-Native stack does with Claude Code + MCP — Clay han
 | Tool | Monthly cost |
 |------|-------------|
 | Clay | $149–349 (credits scale with usage) |
-| HubSpot | Free–$45/month |
-| Instantly | $30–78/month |
-| RB2B | Free–$149/month |
+| Attio | Free–$29/seat |
+| Instantly | $47–97/month |
+| HeyReach | $79/seat |
 | Exa AI | ~$5–50 |
-| **Total** | **~$185–670/month** |
+| **Total** | **~$280–605/month** |
 
 ## Setup Order
 
 1. **Clay** — Create workspace, learn the table model
-2. **CRM** — HubSpot free tier or use Clay tables as CRM
+2. **CRM** — Attio free tier or use Clay tables as CRM
 3. **Clay integrations** — Connect CRM, email, Slack
-4. **Sequencer** — Connect Instantly or lemlist, set up Clay → sequencer push
-5. **Signal source** — RB2B pixel or Common Room integrations
+4. **Outreach** — Connect Instantly or lemlist, set up Clay → outreach push
+5. **LinkedIn** — Connect HeyReach for LinkedIn sender rotation
+6. **Signal source** — Common Room or Trigify integrations
 
 ## Who This Is For
 

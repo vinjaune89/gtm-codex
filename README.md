@@ -10,8 +10,9 @@ Your Claude Code (or any LLM agent) now knows the GTME landscape.
 
 ## What This Is
 
-A category-first reference of the tools GTM engineers use: enrichment, sequencing, CRM, orchestration, signals, research, content. Each tool entry includes:
+A workflow-first reference of the tools GTM engineers use: CRM, discovery, enrichment, scraping, outreach, signals, orchestration. Each tool entry includes:
 
+- **Status badge** — our relationship to the tool (`★ In our stack`, `Tested`, `Researched`)
 - **Selection criteria** — when to pick it over alternatives
 - **API/CLI score** — how well it plays with agents and scripts (1–5 stars)
 - **Getting started** — setup instructions an AI agent can follow
@@ -31,14 +32,13 @@ The GTM engineering stack is shifting from "click buttons in 12 tabs" to "tell y
 
 | Category | What it covers |
 |----------|---------------|
-| [CRM](categories/crm.md) | Contact and deal management |
-| [Enrichment](categories/enrichment.md) | Data enrichment and contact discovery |
-| [Sequencing](categories/sequencing.md) | Outbound email sequencing |
-| [Intent/Signals](categories/intent-signals.md) | Buying intent and signal detection |
-| [Orchestration](categories/orchestration.md) | Workflow automation and middleware |
-| [AI Agents](categories/ai-agents.md) | AI copilots, agents, and wrappers |
-| [Research](categories/research.md) | Web research and intelligence |
-| [Content/Social](categories/content-social.md) | Content creation and social selling |
+| [CRM](categories/crm.md) | Pipeline and contact management |
+| [Discovery](categories/discovery.md) | Finding targets — web search, ICP matching, lookalikes |
+| [Enrichment](categories/enrichment.md) | Contact data — emails, phones, firmographics |
+| [Scraping](categories/scraping.md) | Extracting data from known URLs |
+| [Outreach](categories/outreach.md) | Email sequences and LinkedIn automation |
+| [Signals](categories/signals.md) | Monitoring engagement and trigger events |
+| [Orchestration](categories/orchestration.md) | Connecting tools and automating workflows |
 
 ## Stack Recipes
 
@@ -67,13 +67,12 @@ git clone https://github.com/vinjaune89/gtm-codex.git knowledge/gtm-codex
 | I need to... | Start here |
 |--------------|-----------|
 | Store contacts and deals | [CRM](categories/crm.md) |
-| Find emails and enrich data | [Enrichment](categories/enrichment.md) |
-| Send cold email sequences | [Sequencing](categories/sequencing.md) |
-| Detect buying signals | [Intent/Signals](categories/intent-signals.md) |
+| Find companies and prospects | [Discovery](categories/discovery.md) |
+| Get emails and enrich contact data | [Enrichment](categories/enrichment.md) |
+| Scrape data from web pages | [Scraping](categories/scraping.md) |
+| Send cold email or LinkedIn outreach | [Outreach](categories/outreach.md) |
+| Detect buying signals and triggers | [Signals](categories/signals.md) |
 | Connect tools and automate workflows | [Orchestration](categories/orchestration.md) |
-| Build AI-powered GTM workflows | [AI Agents](categories/ai-agents.md) |
-| Research companies and prospects | [Research](categories/research.md) |
-| Create content and grow on social | [Content/Social](categories/content-social.md) |
 
 ## Creators to Follow
 

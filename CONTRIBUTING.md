@@ -9,6 +9,7 @@
 ```markdown
 ### Tool Name
 
+**Status**: Researched
 **URL**: https://...
 **Pricing**: Free | Freemium | Paid | Enterprise
 **API/CLI**: ★★★★☆ (1-5)
@@ -27,6 +28,16 @@ API keys, MCP config, basic integration pattern.
 #### Connects to
 Which other tools in this codex it pairs with.
 ```
+
+**Status badge** is mandatory — the first field after the tool heading. Three levels:
+
+| Status | Meaning |
+|--------|---------|
+| `★ In our stack` | We run this daily in production |
+| `Tested` | We've used it, have direct experience |
+| `Researched` | We've evaluated it, haven't run it in production |
+
+Most contributed tools will be `Researched`. If you use the tool daily, note it.
 
 4. Open a PR
 

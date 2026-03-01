@@ -4,16 +4,17 @@ This file tells your Claude Code (or any LLM agent) how to use this repository a
 
 ## What This Repo Is
 
-A curated reference of GTM (Go-To-Market) engineering tools — enrichment, sequencing, CRM, orchestration, research, signals, content. Each tool entry includes selection criteria, setup instructions, and integration patterns written for AI agents to read and act on.
+A curated reference of GTM (Go-To-Market) engineering tools — CRM, discovery, enrichment, scraping, outreach, signals, orchestration. Each tool entry includes a status badge (our relationship to it), selection criteria, setup instructions, and integration patterns written for AI agents to read and act on.
 
 ## How to Use This
 
 ### Tool discovery
 
 When the user asks about GTM tools, which tool to use, or how tools compare:
-1. Consult `categories/` — each file covers one tool category with 3+ tools
-2. Each tool entry has: pricing, API/CLI score, best-for, gotchas, selection criteria, getting started
+1. Consult `categories/` — each file covers one tool category with 2+ tools
+2. Each tool entry has: status badge, pricing, API/CLI score, best-for, gotchas, selection criteria, getting started
 3. Cross-reference the `Connects to` section to understand how tools compose
+4. Status badges indicate our relationship: `★ In our stack` (daily use), `Tested` (direct experience), `Researched` (evaluated only)
 
 ### Tool selection
 
@@ -41,22 +42,21 @@ When the user is building a GTM stack from scratch or evaluating their setup:
 
 | Category | File | Covers |
 |----------|------|--------|
-| CRM | `categories/crm.md` | Contact and deal management platforms |
-| Enrichment | `categories/enrichment.md` | Data enrichment and contact discovery |
-| Sequencing | `categories/sequencing.md` | Outbound email sequencing and automation |
-| Intent/Signals | `categories/intent-signals.md` | Buying intent detection and signal monitoring |
-| Orchestration | `categories/orchestration.md` | Workflow automation and middleware |
-| AI Agents | `categories/ai-agents.md` | AI copilots, agents, and wrappers for GTM |
-| Research | `categories/research.md` | Web research and intelligence gathering |
-| Content/Social | `categories/content-social.md` | Content creation and social selling tools |
+| CRM | `categories/crm.md` | Pipeline and contact management |
+| Discovery | `categories/discovery.md` | Finding targets — web search, ICP matching, lookalikes |
+| Enrichment | `categories/enrichment.md` | Contact data — emails, phones, firmographics |
+| Scraping | `categories/scraping.md` | Extracting data from known URLs |
+| Outreach | `categories/outreach.md` | Email sequences and LinkedIn automation |
+| Signals | `categories/signals.md` | Monitoring engagement and trigger events |
+| Orchestration | `categories/orchestration.md` | Connecting tools and automating workflows |
 
 ## Cross-Category Patterns
 
 These tools frequently compose together:
 
-- **Enrichment → Sequencing**: Enriched contacts feed into outbound sequences
-- **Research → Enrichment**: Web research discovers leads, enrichment adds contact data
-- **Intent/Signals → Sequencing**: Signal detection triggers outbound sequences
+- **Discovery → Enrichment → Outreach**: Find targets, get their data, reach out
+- **Signals → Outreach**: Signal detection triggers timely outreach
+- **Scraping → Enrichment**: Extract web data, enrich with contact info
 - **CRM → Everything**: CRM is the system of record that all other tools sync to
 - **Orchestration → All categories**: Orchestration tools connect and automate across categories
 

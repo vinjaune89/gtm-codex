@@ -1,12 +1,13 @@
 # Orchestration
 
-Workflow automation and middleware — the plumbing that connects enrichment, sequencing, CRM, and outbound into end-to-end pipelines. These tools range from spreadsheet-like orchestration (Clay) to self-hosted workflow engines (n8n) to AI-native app connectors (Composio/RUBE). The unifying trait: they sit between your tools and make them talk to each other without manual copy-paste.
+Workflow automation and middleware — the plumbing that connects enrichment, outreach, CRM, and signal detection into end-to-end pipelines. These tools range from spreadsheet-like orchestration (Clay) to self-hosted workflow engines (n8n) to AI-native app connectors (Composio/RUBE). The unifying trait: they sit between your tools and make them talk to each other without manual copy-paste.
 
 **Also in this space**: Make (make.com) and Zapier (zapier.com) are the incumbent GUI-first platforms. Both have APIs but are designed around visual builders, not CLI or agent workflows. Make is more flexible and cheaper at scale; Zapier is simpler but expensive per-task. API/CLI score: ★★☆☆☆ for both. Use them if your team is non-technical and needs drag-and-drop; skip them if you're building agent-driven pipelines.
 
 ---
 
 ### Clay (Tables)
+**Status**: Tested — enrichment workflows
 
 **URL**: https://www.clay.com
 **Pricing**: Freemium (free tier with limited credits; Explorer from $349/mo, Pro from $720/mo — credits-based)
@@ -34,13 +35,14 @@ Pick Clay when enrichment is the core of your workflow — you need to go from a
 #### Connects to
 
 - **Enrichment tools** (this codex: `enrichment.md`) — Clay IS enrichment for most users, but you can also pipe Clay-enriched data into standalone enrichment tools or vice versa
-- **Sequencing tools** (`sequencing.md`) — enriched + scored leads export to Smartlead, Instantly, lemlist for outbound
+- **Outreach tools** (`outreach.md`) — enriched + scored leads export to Smartlead, Instantly, lemlist for outbound
 - **CRM** (`crm.md`) — bi-directional sync with HubSpot, Salesforce (Pro plan); push to Attio, Pipedrive via webhooks or Zapier/Make
-- **Research tools** (`research.md`) — Claygent (built-in AI agent) can query web sources; pairs with Exa for deeper research before enrichment
+- **Discovery tools** (`discovery.md`) — Claygent (built-in AI agent) can query web sources; pairs with Exa for deeper research before enrichment
 
 ---
 
 ### n8n
+**Status**: Researched
 
 **URL**: https://n8n.io
 **Pricing**: Freemium (self-hosted Community Edition is free and unlimited; Cloud from €24/mo Starter, €60/mo Pro, €800/mo Business)
@@ -74,7 +76,7 @@ Pick n8n when you need reliable, repeatable automations that you control — esp
 #### Connects to
 
 - **CRM** (`crm.md`) — native nodes for HubSpot, Salesforce, Pipedrive, Attio. Common pattern: CRM webhook triggers n8n workflow for enrichment or routing
-- **Sequencing tools** (`sequencing.md`) — trigger sequence enrollment via API nodes (Smartlead, Instantly, lemlist all have HTTP APIs)
+- **Outreach tools** (`outreach.md`) — trigger sequence enrollment via API nodes (Smartlead, Instantly, lemlist all have HTTP APIs)
 - **Enrichment tools** (`enrichment.md`) — HTTP Request node calls any enrichment API; schedule periodic enrichment runs
 - **Clay** (this file) — n8n can trigger Clay table runs via webhook, or process Clay webhook outputs for downstream routing
 - **Composio/RUBE** (this file) — n8n workflows can call Composio actions via HTTP, or RUBE can trigger n8n workflows. Use n8n for scheduled/event-driven automation, RUBE for ad-hoc agent tasks
@@ -82,6 +84,7 @@ Pick n8n when you need reliable, repeatable automations that you control — esp
 ---
 
 ### Composio (RUBE)
+**Status**: ★ In our stack — MCP middleware
 
 **URL**: https://composio.dev (platform) / https://userube.com (RUBE consumer product)
 **Pricing**: Freemium (free: 1,000 requests/day; Pro: $25/mo for 600+ apps, unlimited requests; Enterprise: custom)
@@ -114,21 +117,73 @@ Pick Composio/RUBE when your AI agent needs to interact with business apps — r
 #### Connects to
 
 - **CRM** (`crm.md`) — read/write to Attio, HubSpot, Salesforce, Pipedrive through RUBE's app connections. Useful for agent-driven CRM updates (add notes, change stages, log interactions)
-- **Sequencing tools** (`sequencing.md`) — trigger sends, check delivery status, manage contacts in sequencing platforms via their connected apps
-- **Research tools** (`research.md`) — Gmail search for reply verification, LinkedIn for profile context (write-only), X/Twitter for social signals
+- **Outreach tools** (`outreach.md`) — trigger sends, check delivery status, manage contacts in sequencing platforms via their connected apps
+- **Discovery tools** (`discovery.md`) — Gmail search for reply verification, LinkedIn for profile context (write-only), X/Twitter for social signals
 - **n8n** (this file) — RUBE can trigger n8n workflows via webhook; n8n can call Composio actions via HTTP. Use RUBE for agent-initiated actions, n8n for scheduled/event-driven automation
 - **Clay** (this file) — RUBE can push data into Clay via webhook triggers or pull enrichment results. Clay handles the enrichment waterfall, RUBE handles the surrounding actions (email send, Slack notification, CRM update)
 
 ---
 
+### Cargo
+**Status**: Researched
+
+**URL**: https://getcargo.io
+**Pricing**: Paid — Starter $250/month, Growth $500/month, Enterprise custom
+**API/CLI**: ★★★★☆
+
+Revenue orchestration platform that combines data enrichment, workflow automation, and CRM sync in one tool. Full REST API + TypeScript SDK + MCP integration (both client and server modes). Sits between Clay (enrichment-focused) and n8n (general automation) — purpose-built for GTM workflows with native CRM and sequencer integrations.
+
+**Best for**: Revenue teams that need enrichment + workflow automation + CRM sync without stitching three tools together. Automated lead scoring and routing workflows. Teams that want Clay-like enrichment with more sophisticated automation logic. Companies outgrowing spreadsheet-based GTM workflows.
+
+**Watch out**: $250/month minimum is steep for solo operators — Clay starts at $149 and n8n self-hosted is free. The platform is relatively new compared to Clay and n8n, so community resources and templates are thinner. MCP integration exists but documentation is sparse. TypeScript SDK is well-maintained but not as battle-tested as Clay's or n8n's ecosystems.
+
+#### Selection criteria
+
+Pick Cargo when you need a purpose-built GTM workflow platform — more structured than n8n (which is general-purpose) and more automated than Clay (which is spreadsheet-first). Cargo's native CRM integrations and lead routing logic make it strong for teams with defined sales processes. If you want maximum enrichment coverage, Clay's 100+ provider waterfall is deeper. If you want general-purpose automation beyond GTM, n8n is more flexible. If you want agent-first middleware, Composio/RUBE is more native to AI workflows.
+
+#### Getting started
+
+1. Sign up at getcargo.io — demo required for most plans
+2. REST API and TypeScript SDK available for programmatic access
+3. MCP integration (client and server modes) — enables Claude-based agent workflows
+```json
+{
+  "mcpServers": {
+    "cargo": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/cargo-mcp-server"],
+      "env": {
+        "CARGO_API_KEY": "YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+4. Native integrations: Salesforce, HubSpot, Attio, Instantly, Smartlead, Outreach
+5. Workflow builder: visual + API for building enrichment → scoring → routing pipelines
+
+#### Connects to
+
+- **CRM (Attio, Salesforce)** (`crm.md`): Native bi-directional sync. Lead data flows in, enriched/scored data flows back.
+- **Outreach (Instantly, Smartlead)** (`outreach.md`): Qualified leads push directly into outbound sequences.
+- **Enrichment (Clay)** (`enrichment.md`): Cargo can complement Clay — use Clay for deep waterfall enrichment, Cargo for workflow routing.
+- **Discovery (Exa)** (`discovery.md`): Research results feed into Cargo workflows for automated qualification.
+- **Signals (Common Room, Trigify)** (`signals.md`): Signal events trigger Cargo workflows for timely outreach routing.
+
+---
+
+**Also in this space**: Deepline (deepline.ai) — enterprise RevOps OS that unifies data warehouses, CRM, and workflow automation. Warehouse-native architecture, AI-powered pipeline management. No public API, no MCP server — contact sales for access. Relevant for enterprise teams with data engineering resources who want their RevOps layer sitting on top of their data warehouse rather than in a SaaS silo.
+
+---
+
 ## Quick comparison
 
-| Dimension | Clay | n8n | Composio/RUBE |
-|-----------|------|-----|---------------|
-| Mental model | Spreadsheet that does things | Visual workflow builder | Universal app connector |
-| Strength | Enrichment + waterfall logic | Scheduled multi-step automations | AI agent ↔ business tools |
-| MCP support | Anthropic-hosted connector | Native MCP server + community servers | Native MCP (7 meta-tools) |
-| Self-hostable | No | Yes (free Community Edition) | No (SaaS) |
-| Billing model | Credits per enrichment action | Per execution (not per step) | Requests per day |
-| Complexity ceiling | Medium (table metaphor limits branching) | High (arbitrary workflow logic) | Medium (agent-driven, not scheduled) |
-| Best pair | Sequencing tools (outbound) | CRM + webhooks (routing) | AI coding agents (Claude Code, Cursor) |
+| Dimension | Clay | n8n | Composio/RUBE | Cargo |
+|-----------|------|-----|---------------|-------|
+| Mental model | Spreadsheet that does things | Visual workflow builder | Universal app connector | GTM workflow platform |
+| Strength | Enrichment + waterfall logic | Scheduled multi-step automations | AI agent ↔ business tools | Enrichment + routing + CRM sync |
+| MCP support | Anthropic-hosted connector | Native MCP server + community | Native MCP (7 meta-tools) | Client + server MCP |
+| Self-hostable | No | Yes (free Community Edition) | No (SaaS) | No (SaaS) |
+| Billing model | Credits per enrichment action | Per execution (not per step) | Requests per day | Monthly subscription |
+| Complexity ceiling | Medium (table metaphor limits branching) | High (arbitrary workflow logic) | Medium (agent-driven, not scheduled) | Medium-High (GTM-specific) |
+| Best pair | Outreach tools (outbound) | CRM + webhooks (routing) | AI coding agents (Claude Code, Cursor) | CRM + outreach (pipeline) |

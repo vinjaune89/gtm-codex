@@ -21,7 +21,7 @@ This is the stack behind the [GTM Cortex](https://advancedpectoralthinking.subst
 ## What's Notably Absent
 
 - **No sequencer** (Instantly, lemlist, etc.) — every message is human-reviewed. Volume is low, quality is high.
-- **No intent platform** (6sense, Bombora) — signal detection is manual + Exa news monitoring.
+- **No signal platform** (Common Room, Trigify) — signal detection is manual + Exa news monitoring.
 - **No Clay tables for orchestration** — Claude Code + MCP handles workflow automation.
 
 ## Cost
@@ -42,7 +42,7 @@ This is the stack behind the [GTM Cortex](https://advancedpectoralthinking.subst
 
 1. **Claude Code** — Install, set up project directory, create CLAUDE.md
 2. **Attio** — Create workspace, set up pipelines, get API key
-3. **Attio MCP** — Connect via `@anthropic/attio-mcp-server`
+3. **Attio MCP** — Connect via remote MCP at `https://mcp.attio.com/mcp`
 4. **Exa AI** — Get API key from dashboard.exa.ai, connect MCP
 5. **Clay** — Create account, connect MCP for enrichment
 6. **Composio/RUBE** — Connect business tools (Gmail, Slack, LinkedIn)
